@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hyperbolic Raymarching</title>
+  <script src="../../lib/jquery.js"></script>
+  <link rel="stylesheet" href="../../lib/webglcode.css" />
+</head>
+
+<body>
+<p>Hyperbolic Raymarching Demo</p>
+<p>To-do list</p>
+<ul>
+  <li>add rotation</li>
+  <li>add lights</li>
+  <li>add color</li>
+  <li>add more geometries</li>
+</ul>
+
+<canvas id="Hcanvas" class="canvas3D">
+  Please use a browser that supports "canvas"
+</canvas>
+<br>
+
+
+<div>
+
+<!-- An HTML control element that can be used to modify the rendering behavior -->
+<input type="checkbox" id="my_pause" checked> Animate<br>
+<p>Mode Selection</p>
+<select id="typeselector" size="3">
+  <option id = "type_1" value="1">Euclidean</option>
+  <option id = "type_2" value="2">Hyperbolic with tangent space projection</option>
+  <option id = "type_3" value="3">Hyperbolic with Klein projection</option>
+  <option id = "type_4" value="4">Hyperbolic with Poincere disk projection</option>
+</select>
+
+<p>Shadow mode</p>
+<select id="shadowselector" size="3">
+  <option id = "directshadow" value="0">Soft Shadow Disabled</option>
+  <option id = "softshadow" value="1">Soft Shadow Enabled</option>
+  <option id = "noshadow" value="2">Shadow Disabled</option> 
+</select>
+</div>
+
+<p>Ray Origin</p>
+  <label >x:</label>
+  <input type="number" id="ro_x" step = "0.1" value = "0.0"><br>
+  <label >y:</label>
+  <input type="number" id="ro_y" step = "0.1" value = "0.0"><br>
+  <label >z:</label>
+  <input type="number" id="ro_z" step = "0.1" value = "0.0"><br>
+
+<p>Field of View</p>
+<label >fov:</label>
+<input type="range" id="fov" value = "0.25" min = "0.01" max = "0.7", step = "0.01"><br>
+<!-- iFovMax = clamp(fov,0.,sqrt(1.-pow(0.5*min(iResolution.x,iResolution.y)/max(iResolution.x,iResolution.y),2.)-0.25));-->
+
+<p>Ray Direction</p>
+
+
+
+<!-- Load the JavaScript libraries and data files for the WebGL rendering -->
+<script src="../../lib/learn_webgl.js"></script>
+<script src="../../lib/learn_webgl_console_messages.js"></script>
+<script src="../../lib/learn_webgl_point4.js"></script>
+<script src="../../lib/learn_webgl_vector3.js"></script>
+<script src="../../lib/learn_webgl_matrix.js"></script>
+<script src="./simple_model_03.js"></script>
+<script src="./simple_model_render_03.js"></script>
+<script src="./scene_events.js"></script>
+<script src="./scene_render.js"></script>
+
+<!--
+  Create an instance of the learn_webgl class, and start the WebGL program.
+  We do this here to pass the canvas ID into the javascript code.
+-->
+<script>
+  var models = [];
+  var shaders = ["../../lib/shaders/shader02.vert", "../../lib/shaders/shader02.frag"];
+  var controls = ["my_pause","type_1","type_2","type_3","type_4","directshadow","softshadow","noshadow","ro_x","ro_y","ro_z","fov"];
+  var my_program = new Learn_webgl("Hcanvas", "SceneRender", models, shaders, controls);
+</script>
+
+</body>
+</html>
